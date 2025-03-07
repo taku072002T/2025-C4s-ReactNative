@@ -16,8 +16,10 @@ provider "google-beta" {
 resource "google_project" "default" {
   provider = google-beta
 
-  # project_id は全世界で一意になる必要がある
-  project_id      = "c4s-cloud-sandbox-20250304"
+  # project_id は全世界で一意になる必要がある。
+  # 今回は、各自で適当にidを変更すること。しかし、大文字は使えない。
+  project_id      = "c4s-cloudff-sandbox-20250304"
+  # これはなんでもいい。
   name            = "C4s-CloudF-sandbox"
 
   # Firebase のプロジェクトとして表示するために必要
