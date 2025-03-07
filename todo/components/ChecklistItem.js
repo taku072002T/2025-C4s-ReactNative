@@ -13,7 +13,7 @@ const ChecklistItem = ({ text }) => {
           onPress={() => setChecked(!checked)}
         />
       </TouchableOpacity>
-      <Text>{text}</Text>
+      <Text style={checked ? styles.checkedText : {}}>{text}</Text>
     </View>
   );
 };
@@ -29,6 +29,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
   },
+  checkedText: {
+    textDecorationLine: 'line-through',
+    color: '#888', // チェック済みテキストは色を薄くする
+  }
 });
 
 export default ChecklistItem; 
