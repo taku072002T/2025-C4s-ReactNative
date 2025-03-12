@@ -14,7 +14,7 @@ const handleAdd = () => {
 
 return (
     <Modal visible={visible}>
-        <TextInput value={text} onChangeText={setText} />
+        <TextInput value={text} onChangeText={setText} style={{borderWidth: 1, marginTop: 100}} />
         <Button title="追加" onPress={handleAdd} />
         <Button title="キャンセル" onPress={onClose} />
     </Modal>
