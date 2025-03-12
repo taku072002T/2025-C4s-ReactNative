@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 
-const ChecklistItem = ({ text }) => {
+const ChecklistItem = ({ text, id, removeItem }) => {
   const [checked, setChecked] = useState(false);
-  
+
   return (
     <View style={styles.item}>
       <TouchableOpacity style={styles.checkbox}>
@@ -14,6 +14,7 @@ const ChecklistItem = ({ text }) => {
         />
       </TouchableOpacity>
       <Text style={checked ? styles.checkedText : {}}>{text}</Text>
+      <Button title="削除" onPress={() => removeItem(id)}></Button>
     </View>
   );
 };

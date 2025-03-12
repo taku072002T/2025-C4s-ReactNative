@@ -1,27 +1,35 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Button, TextInput } from 'react-native';
 import Checklist from './components/Checklist';
-import React, { useState } from 'react';
-import AddTodoPopup from './components/AddTodo';
+import { useState } from 'react';
+
 
 // サンプルデータ
-const todoItems = [
+const TodoItems = [
+  { id: 1, text: 'サンプル1'},
+  { id: 2, text: 'サンプル2'},
+  { id: 3, text: 'サンプル3'},
 ];
 
-export default function App() {
-  const [isPopupVisible, setPopupVisible] = useState(false);
-  const [TodoItems, setTodoItems] = useState(todoItems);
 
-  const addTodoItem = (text) => {
-    setTodoItems([...TodoItems, { id: TodoItems.length + 1, text }]);
-  };
+export default function App() {
+  const [todoItems, settodoItems] = useState(TodoItems);
+  const [todoText, settodoText] = useState('')
+
+  const removeItem = (id) =>{
+    settodoItems(todoItems.filter((todoitem) => todoitem.id !== id));
+  }
+
+  const addtodoItems = () => {
+    settodoItems([...todoItems, { id: todoItems.length + 1, text: todoText}])
+  }
 
   return (
     <View style={styles.container}>
-      <Checklist items={TodoItems} />
+      <Checklist items={todoItems} removeItem={removeItem} />
       <StatusBar style="auto" />
-      <Button title="項目を追加" onPress={() => setPopupVisible(true)} />
-      <AddTodoPopup visible={isPopupVisible} onClose={() => setPopupVisible(false)} onAdd={addTodoItem} />
+      <TextInput value={todoText} onChangeText={(text) => {settodoText(text)}}></TextInput>
+      <Button title="追加" onPress={addtodoItems} />
     </View>
   );
 }
@@ -29,5 +37,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff'
   },
+  button: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    backgroundColor: 'blue'
+  }
 });
