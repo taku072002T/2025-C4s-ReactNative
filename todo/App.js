@@ -1,17 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import Checklist from './components/Checklist';
+import React, { useState } from 'react';
+import AddTodoPopup from './components/AddTodo';
 
 // サンプルデータ
 const todoItems = [
-  { id: 1, text: '勉強！' },
 ];
 
 export default function App() {
+  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [TodoItems, setTodoItems] = useState(todoItems);
+
+  const addTodoItem = (text) => {
+    setTodoItems([...TodoItems, { id: TodoItems.length + 1, text }]);
+  };
+
   return (
     <View style={styles.container}>
-      <Checklist items={todoItems} />
+      <Checklist items={TodoItems} />
       <StatusBar style="auto" />
+      <Button title="項目を追加" onPress={() => setPopupVisible(true)} />
+      <AddTodoPopup visible={isPopupVisible} onClose={() => setPopupVisible(false)} onAdd={addTodoItem} />
     </View>
   );
 }
@@ -19,8 +29,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-    paddingTop: 50,
   },
 });

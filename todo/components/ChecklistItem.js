@@ -27,11 +27,10 @@ const styles = StyleSheet.create({
   checkbox: {
     marginRight: 10,
     borderWidth: 1,
-    borderColor: 'black',
   },
   checkedText: {
     textDecorationLine: 'line-through',
-    color: '#888', // チェック済みテキストは色を薄くする
+    color: '#888',
   }
 });
 
